@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cybersecurity Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error-message {
+            color: red;
+        }
+        .success-message {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cybersecurity Application</h1>
+
+        <form id="login-form">
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="username" required><br>
+
+            <label for="password">Parola:</label>
+            <input type="password" id="password" required><br>
+
+            <label for="captcha">Captcha:</label>
+            <img src="captcha_image.png" alt="Captcha Image"><br>
+            <input type="text" id="captcha" required><br>
+
+            <label for="remember-me">Beni Hatırla:</label>
+            <input type="checkbox" id="remember-me"><br>
+
+            <input type="submit" value="Giriş Yap">
+        </form>
+
+        <p class="error-message" id="error-message"></p>
+        <p class="success-message" id="success-message"></p>
+
+        <script>
+            document.getElementById("login-form").addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                var captcha = document.getElementById("captcha").value;
+                var rememberMe = document.getElementById("remember-me").checked;
+
+                // Sunucu tarafında daha karmaşık bir kullanıcı doğrulama işlemi simüle ediyoruz.
+                setTimeout(function() {
+                    if (username === "admin" && password === "securepassword" && captcha === "CAPTCHA123") {
+                        if (rememberMe) {
+                            document.cookie = "username=" + username;
+                        }
+                        document.getElementById("error-message").textContent = "";
+                        document.getElementById("success-message").textContent = "Hoş geldiniz, " + username + "!";
+                    } else {
+                        document.getElementById("success-message").textContent = "";
+                        document.getElementById("error-message").textContent = "Hatalı kullanıcı adı, parola veya captcha!";
+                    }
+                }, 2000);
+            });
+        </script>
+    </div>
+</body>
+</html>
